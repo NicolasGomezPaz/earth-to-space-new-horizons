@@ -540,7 +540,7 @@ def _translate_df(data: Any) -> Any:
     df_c = data.copy()
     df_c.columns = [translate_text(str(c)) for c in df_c.columns]
     for col in df_c.columns:
-        if df_c[col].dtype == object:
+        if df_c[col].dtype == object or pd.api.types.is_string_dtype(df_c[col]):
             df_c[col] = df_c[col].apply(lambda x: translate_text(x) if isinstance(x, str) else x)
     return df_c
 
@@ -559,6 +559,8 @@ def _wrap_func(orig_fn, arg_positions=(0,), kw_names=("label", "help", "placehol
             for kw in kw_names:
                 if kw in new_kwargs and isinstance(new_kwargs[kw], str):
                     new_kwargs[kw] = translate_text(new_kwargs[kw])
+            if "format_func" not in new_kwargs and any(isinstance(a, (list, tuple)) and "Personalizado" in a for a in list(new_args) + [new_kwargs.get("options")]):
+                new_kwargs["format_func"] = translate_text
             if "format_func" in new_kwargs and callable(new_kwargs["format_func"]):
                 orig_ff = new_kwargs["format_func"]
                 new_kwargs["format_func"] = lambda item, _f=orig_ff: translate_text(_f(item))
@@ -585,6 +587,8 @@ def _wrap_method(orig_fn, arg_positions=(1,), kw_names=("label", "help", "placeh
             for kw in kw_names:
                 if kw in new_kwargs and isinstance(new_kwargs[kw], str):
                     new_kwargs[kw] = translate_text(new_kwargs[kw])
+            if "format_func" not in new_kwargs and any(isinstance(a, (list, tuple)) and "Personalizado" in a for a in list(new_args) + [new_kwargs.get("options")]):
+                new_kwargs["format_func"] = translate_text
             if "format_func" in new_kwargs and callable(new_kwargs["format_func"]):
                 orig_ff = new_kwargs["format_func"]
                 new_kwargs["format_func"] = lambda item, _f=orig_ff: translate_text(_f(item))
