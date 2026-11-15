@@ -49,6 +49,17 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+from src.i18n import setup_i18n
+app_lang = st.sidebar.radio(
+    "🌐 Language / Idioma",
+    options=["en", "es"],
+    format_func=lambda x: "🇬🇧 English" if x == "en" else "🇪🇸 Español",
+    horizontal=True,
+    index=0,
+    key="app_language_selector"
+)
+setup_i18n(app_lang)
+
 # Rutas de datos
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 DATA_DIR = os.path.join(BASE_DIR, "data")
