@@ -39,6 +39,8 @@ from src.simulator import (
     MONTH_LABELS_ES
 )
 
+from src.environmental_tab import render_environmental_tab
+
 # -----------------------------------------------------------------------------
 # Configuración general de la página Streamlit
 # -----------------------------------------------------------------------------
@@ -482,7 +484,8 @@ tab_discovery, tab_deep_dive, tab_duel, tab_laboratory, tab_experiments = st.tab
     "🔬 Análisis Detallado",
     "⚖️ Comparativa Directa",
     "📊 Laboratorio",
-    "🧪 Experimentos"
+    "🧪 Experimentos",
+    "🌿 Ambiental"
 ])
 
 
@@ -1512,6 +1515,12 @@ with tab_experiments:
             if dl2.button("🗑️ Limpiar bitácora"):
                 st.session_state["experiment_log"] = []
                 st.rerun()
+
+with tab_env:
+    try:
+        render_environmental_tab(scored_df, seasonality_base, st.session_state["selected_site_name"], app_lang)
+    except Exception as _env_err:
+        st.warning(f"Environmental module notice: {_env_err}")
 
 st.markdown("---")
 st.html("""<div style="background: linear-gradient(135deg, #060D21 0%, #0F2557 60%, #081229 100%); border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 14px; padding: 28px 36px; margin-top: 10px; text-align: center; font-family: Space Grotesk, sans-serif;">
