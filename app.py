@@ -273,6 +273,7 @@ st.markdown("""
         background: linear-gradient(135deg, #2563EB 0%, #38BDF8 100%) !important;
         box-shadow: 0 4px 16px rgba(37, 99, 235, 0.4) !important;
     }
+[data-testid="InputInstructions"] { display: none !important; }
 </style>
 """, unsafe_allow_html=True)
 
