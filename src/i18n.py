@@ -532,6 +532,14 @@ def _translate_plotly_fig(fig: Any) -> Any:
     except Exception:
         return fig
 
+def _translate_col_config(cc: dict) -> dict:
+    out = {}
+    for k, v in cc.items():
+        if isinstance(v, dict) and isinstance(v.get("label"), str):
+            v = dict(v)
+            v["label"] = translate_text(v["label"])
+        out[translate_text(k)] = v
+    return out
 
 def _translate_df(data: Any) -> Any:
     """Traduce encabezados y columnas categóricas de DataFrames antes de renderizar."""
@@ -640,7 +648,7 @@ def setup_i18n(lang: str = "en") -> None:
             def _dg_tbl(self, data=None, *a, _o=orig_tb, **kw):
                 if "column_config" in kw and isinstance(kw["column_config"], dict) and _CURRENT_LANG == "en":
                     kw = dict(kw)
-                    kw["column_config"] = {translate_text(k): v for k, v in kw["column_config"].items()}
+                    kw["column_config"] = _translate_col_config(kw["column_config"])
                 return _o(self, _translate_df(data), *a, **kw)
             setattr(DeltaGenerator, tbl_name, _dg_tbl)
 
@@ -672,7 +680,7 @@ def setup_i18n(lang: str = "en") -> None:
             def _st_tbl(data=None, *a, _o=orig_st_tb, **kw):
                 if "column_config" in kw and isinstance(kw["column_config"], dict) and _CURRENT_LANG == "en":
                     kw = dict(kw)
-                    kw["column_config"] = {translate_text(k): v for k, v in kw["column_config"].items()}
+                    kw["column_config"] = _translate_col_config(kw["column_config"])
                 return _o(_translate_df(data), *a, **kw)
             setattr(st, tbl_name, _st_tbl)
 
