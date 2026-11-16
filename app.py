@@ -479,7 +479,7 @@ st.html(hero_banner_html)
 # -----------------------------------------------------------------------------
 # 5 PESTAÑAS PRINCIPALES (PÍLDORAS MODERNAS EN AZUL FRANCIA)
 # -----------------------------------------------------------------------------
-tab_discovery, tab_deep_dive, tab_duel, tab_laboratory, tab_experiments = st.tabs([
+tab_discovery, tab_deep_dive, tab_duel, tab_laboratory, tab_experiments, tab_env = st.tabs([
     "🌍 Explorador Global",
     "🔬 Análisis Detallado",
     "⚖️ Comparativa Directa",
