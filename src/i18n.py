@@ -77,6 +77,7 @@ EXACT_ES_TO_EN: Dict[str, str] = {
     "⚖️ Comparativa Directa": "⚖️ Direct Comparison",
     "📊 Laboratorio": "📊 Data Lab",
     "🧪 Experimentos": "🧪 Experiments",
+    "🌿 Ambiental": "🌿 Environmental",
 
     # Pestaña 1: Explorador Global
     "**🔍 Búsqueda de Localizaciones (OpenStreetMap Nominatim):**": "**🔍 Location Search (OpenStreetMap Nominatim):**",
