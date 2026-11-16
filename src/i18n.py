@@ -171,6 +171,10 @@ EXACT_ES_TO_EN: Dict[str, str] = {
     "Personalizado": "Custom",
     "Masa del rover (kg):": "Rover mass (kg):",
     "Velocidad de marcha (m/s):": "Travel speed (m/s):",
+    "Tierra (1.0 G)": "Earth (1.0 G)",
+    "Fuerza Pendiente (N)": "Slope Force (N)",
+    "Fuerza Rodadura (N)": "Rolling Force (N)",
+    "Potencia Requerida (W)": "Required Power (W)",
     "Potencia en Tierra (1.0 G)": "Power on Earth (1.0 G)",
     "##### ☀️ Simulador 2 — Presupuesto Solar y Atenuación por Polvo (12 Meses)":
         "##### ☀️ Simulator 2 — Solar Budget & Dust Attenuation (12 Months)",
